@@ -2,10 +2,10 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import youtube from '../apis/youtube';
 import VideoList from './VideoList';
-import VideoDetail from './VideoDetail';
+import PopupVideoPlayer from "./PopupVideoPlayer";
 
 class App extends React.Component {
-  state = { videos: [], selectedVideo: null };
+  state = { videos: [], selectedVideo: null, popup: false };
 
   componentDidMount() {
     this.onTermSubmit('buildings');
@@ -22,12 +22,21 @@ class App extends React.Component {
 
     this.setState({
       videos: response.data.items,
-      selectedVideo: response.data.items[0]
+      selectedVideo: response.data.items[0],
+        popup: false
     });
   };
 
+  handleCancel = (e) => {
+    e.preventDefault();
+    this.setState({popup: false});
+  }
+
   onVideoSelect = video => {
-    this.setState({ selectedVideo: video });
+    this.setState({
+      selectedVideo: video,
+      popup: true
+    });
   };
 
     sortByTitle = () =>  {
@@ -81,10 +90,7 @@ class App extends React.Component {
           </div>
         <div className="ui grid">
           <div className="ui row">
-            <div className="eleven wide column">
-              <VideoDetail video={this.state.selectedVideo} />
-            </div>
-            <div className="five wide column">
+            <div className="column">
               <VideoList
                 onVideoSelect={this.onVideoSelect}
                 videos={this.state.videos}
@@ -92,6 +98,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+          {this.state.popup && <PopupVideoPlayer selectedVideo={this.state.selectedVideo} handleCancel={this.handleCancel} /> }
       </div>
     );
   }
