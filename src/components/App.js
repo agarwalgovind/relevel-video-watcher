@@ -30,10 +30,55 @@ class App extends React.Component {
     this.setState({ selectedVideo: video });
   };
 
+    sortByTitle = () =>  {
+        let videos = this.state.videos;
+        videos.sort((a, b) => {
+            if (a.snippet.channelTitle.toLowerCase() < b.snippet.channelTitle.toLowerCase()) return -1;
+            if (a.snippet.channelTitle.toLowerCase() > b.snippet.channelTitle.toLowerCase()) return 1;
+            return 0;
+        })
+        this.setState({
+           videos: videos
+        })
+    }
+
+    sortByTimestamp = () => {
+        let videos = this.state.videos;
+        videos.sort((a, b) => {
+            return new Date(a.snippet.publishTime).getTime() - new Date(b.snippet.publishTime).getTime()
+        })
+        this.setState({
+            videos: videos
+        })
+    }
+
+    deleteSelectedVideo = (e, index) => {
+        e.stopPropagation();
+        let videos = this.state.videos;
+        videos.splice(index, 1);
+        this.setState({videos: videos})
+    }
+
   render() {
     return (
       <div className="ui container">
         <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className="button-container">
+          <input
+              type="button"
+              value="Sort By Title"
+              onClick={this.sortByTitle}
+          /> {' '}
+          <input
+              type="button"
+              value="Sort By UploadTime"
+              onClick={this.sortByTimestamp}
+          />
+        </div>
+          <div>
+              <br />
+              <br />
+          </div>
         <div className="ui grid">
           <div className="ui row">
             <div className="eleven wide column">
