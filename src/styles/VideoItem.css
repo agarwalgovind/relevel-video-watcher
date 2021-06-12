@@ -1,0 +1,10 @@
+.video-item {
+
+  cursor: pointer;
+}
+
+.video-item.item img {
+  height: auto;
+  width: auto;
+
+}
