@@ -4,6 +4,7 @@ import youtube from '../apis/youtube';
 import VideoCard from "./VideoCard";
 import "../styles/app.css"
 import PopupVideoPlayer from "./PopupVideoPlayer";
+import VideoDetail from "./VideoDetail";
 
 class App extends React.Component {
     constructor(props) {
@@ -105,21 +106,30 @@ class App extends React.Component {
                     onClick={this.sortByTimestamp}
                 />
             </div>
-          <div className="ui five column grid">
-              {videos && videos.map((video, index) => {
-                return (
-                    <div className="column" key={index}>
-                      <VideoCard
-                          cardId={index}
-                          onVideoSelect={this.onVideoSelect}
-                          currentVideo={video}
-                          deleteSelectedVideo={(e) => this.deleteSelectedVideo(e, index)}
-                      />
-                    </div>
-                );
-              })}
-          </div>
-          {this.state.popup && <PopupVideoPlayer selectedVideo={this.state.selectedVideo} handleCancel={this.handleCancel} /> }
+            <div className="ui grid">
+                <div className="ui column">
+                  <div className="ui five column grid">
+                      {videos && videos.map((video, index) => {
+                        return (
+                            <div className="column" key={index}>
+                              <VideoCard
+                                  cardId={index}
+                                  onVideoSelect={this.onVideoSelect}
+                                  currentVideo={video}
+                                  deleteSelectedVideo={(e) => this.deleteSelectedVideo(e, index)}
+                              />
+                            </div>
+                        );
+                      })}
+                  </div>
+
+
+                <div className="nine wide column">
+                    <VideoDetail video={this.state.selectedVideo} />
+                </div>
+                </div>
+            </div>
+          {/*{this.state.popup && <PopupVideoPlayer selectedVideo={this.state.selectedVideo} handleCancel={this.handleCancel} /> }*/}
         </div>
     );
   }

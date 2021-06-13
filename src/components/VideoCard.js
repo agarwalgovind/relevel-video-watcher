@@ -18,7 +18,7 @@ const VideoCard = (props) => {
                     <div className="video-content">
                         <span className="text-wrap">{props.currentVideo.snippet.title}</span>
                     </div>
-                    <div className="buttons-wrapper">
+                    {/*<div className="buttons-wrapper">
                         <button className="delete-btn" title="delete" onClick={props.deleteSelectedVideo}>
                             <TrashOutline
                                 color={'#00000'}
@@ -27,7 +27,7 @@ const VideoCard = (props) => {
                                 width="25px"
                             />
                         </button>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </>
