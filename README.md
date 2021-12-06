@@ -43,3 +43,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 # relevel-video-watcher
+
+Note:
+Some of the resources like images, icon links, references etc. have been taken from website and some other internet sources and may be subject to copyright, so try not to use the resources for business purposes/commercial activity or reproduce them. Resources used here are just for the making this project and for educational purpose.
